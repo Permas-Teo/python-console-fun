@@ -229,9 +229,9 @@ def engageCompetitionMode():
     time.sleep(1)
 
 mainMenu = "Welcome to Cows and Bulls.\nEnter 'i' to read instructions\nEnter 'p' to play a game\nEnter 'b' to run a botted game\nPress 'q' to quit\nInput: "
-instructions = "Here are the rules of this game:\n\nI will generate a random 4 digit number. And your job is to guess this number. For each number you guessed" + \
-               " correctly in the right position, I will award you with a Bull. 4 Bulls mean you guessed the number correctly. And hey I have a bot running. He is " + \
-               "hard to beat though. >:)"
+instructions = "Here are the rules of this game:\n\nI will generate a random 4 digit number (with no duplicates). And your job is to guess this number. For each number you guessed" + \
+               " correctly in the right position, I will award you with a Bull, otherwise you get a Cow instead. Getting 4 Bulls mean you guessed the number correctly. And hey you can try competing with my bot. He is " + \
+               "hard to beat though. >:)\nTurns out my bot currently has a bug for some numbers with a certain condition (I don't even know which). Power to anyone if you can spot/fix that bug.\n"
 seeAwesomeBot = "Want to see how many tries my bot can do this in? (y/n)\nCompete with the bot: "
     
 # User interface

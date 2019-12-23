@@ -248,7 +248,7 @@ def init():
         elif getInput == 'p':
             game()
         elif getInput == 'b':
-            bottedGame("9821") 
+            bottedGame("Random") 
         elif getInput == 'q':
             break
 

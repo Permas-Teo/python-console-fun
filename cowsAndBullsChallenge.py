@@ -89,9 +89,10 @@ def validateGuess(string, length):
 def bottedGame(gameState, yourTries = 0):
 
     # Bot variables and state    
-    dic = {"Exist":[],"DoesNotExist":-1,"Answers":[],"Counter":0}
+    dic = {"Exist":[],"DoesNotExist":"9","Answers":[],"Counter":0}
     stage = 0
     state = 0
+    tries = 0
 
     if gameState == "Random":
         answer = genNDigits(4)
@@ -100,11 +101,10 @@ def bottedGame(gameState, yourTries = 0):
         answer = gameState
         print("Let's see how many tries it takes to generate", answer)
     time.sleep(2)
-        
-    tries = 0
-    
+          
     while True:
         time.sleep(0.5)
+        
         tries += 1
         guess = cowbot(stage, state, dic)
         print("Try " + str(tries) + " | Bot guesses " + str(guess))
@@ -131,7 +131,7 @@ def bottedGame(gameState, yourTries = 0):
         elif stage == 1:
             if res == "13":
                 dic["Answers"].append(guess[state])
-                dic["Exist"][dic["Counter"]] = '-1'
+                del dic["Exist"][dic["Counter"]] 
                 print("\nDigit", state + 1, "confirmed. Next!\n")
                 time.sleep(1)
                     
@@ -143,21 +143,20 @@ def bottedGame(gameState, yourTries = 0):
                     
             elif res == "04":
                 dic["Counter"] += 1
-    
-                if dic["Counter"] == 3 - state :
-                    print("\n### Hyper Optimise guess! ###\n")
+
+                if dic["Counter"] == 3 - state:
+
+                    print("\n### Run hyper optimisation! ###")
+                    time.sleep(0.5)
+                    
+                    resCount = dic["Counter"]
+                    dic["Answers"].append(dic["Exist"][resCount])
+                    del dic["Exist"][resCount]
+                    print("\nDigit", state + 1, "confirmed. Next!\n")
                     time.sleep(1)
 
-                    while dic["Exist"][dic["Counter"]] == "-1":
-                        dic["Counter"] += 1
-
-                    dic["Answers"].append(dic["Exist"][dic["Counter"]])
-                    dic["Exist"][dic["Counter"]] = '-1'
-
-                    print("Digit", state + 1, "confirmed. Next!\n")
-                    time.sleep(1)
-                    state += 1
                     dic["Counter"] = 0
+                    state += 1
                     if state == 3:
                         stage += 1
                         state = 0
@@ -165,7 +164,7 @@ def bottedGame(gameState, yourTries = 0):
             else:
                 print("Unexpected output for game: " + res)
     
-    print("\nMy amazing bot finished guessing! The answer is", str(answer), "| Total tries:", str(tries))
+    print("\nBot finished guessing! The answer is", str(answer), "| Total tries:", str(tries))
 
     if yourTries > 0:
         print("\nYour tries:", yourTries)
@@ -249,7 +248,7 @@ def init():
         elif getInput == 'p':
             game()
         elif getInput == 'b':
-            bottedGame("Random")
+            bottedGame("9821") 
         elif getInput == 'q':
             break
 
@@ -275,7 +274,3 @@ init()
 
 
 
-
-
-
-    

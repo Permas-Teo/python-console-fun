@@ -40,7 +40,7 @@ def game():
         
         print("You guess " + str(guess))
         res = takeAGuess(guess, answer)
-        if res == "40":
+        if res == "44":
             break
 
     print("\nYou guessed it! The answer is", str(answer), "| Total tries:", str(tries))
@@ -59,14 +59,15 @@ def game():
 def takeAGuess(guess, answer):
         bulls = 0
         cows = 0
+        answerCopy = list(answer)
         for i in range(4):
+            if guess[i] in answerCopy:
+                cows += 1
+                answerCopy.remove(guess[i])
             if guess[i] == answer[i]:
                 bulls += 1
-            else:
-                cows += 1
-
         print("Cows:", str(cows), "Bulls:", str(bulls))       
-        return str(bulls) + str(cows)
+        return str(cows) + str(bulls)
 
 
 def validateGuess(string, length):
@@ -109,11 +110,11 @@ def bottedGame(gameState, yourTries = 0):
         guess = cowbot(stage, state, dic)
         print("Try " + str(tries) + " | Bot guesses " + str(guess))
         res = takeAGuess(guess, answer)
-        if res == "40":
+        if res == "44":
             break
 
         elif stage == 0:        
-            if res == "13":
+            if res == "11":
                 dic["Exist"].append(guess[0])
                 if len(dic["Exist"]) == 4:
                     print("\nI got the list yo:", dic["Exist"],"\n")
@@ -122,14 +123,14 @@ def bottedGame(gameState, yourTries = 0):
                     state = 0
                     continue
                 
-            elif res == "04":
+            elif res == "00":
                 dic["DoesNotExist"] = guess[0]
             else:
                 print("Unexpected output for game: " + res)
             state += 1
             
         elif stage == 1:
-            if res == "13":
+            if res == "11":
                 dic["Answers"].append(guess[state])
                 del dic["Exist"][dic["Counter"]] 
                 print("\nDigit", state + 1, "confirmed. Next!\n")
@@ -141,7 +142,7 @@ def bottedGame(gameState, yourTries = 0):
                     stage += 1
                     state = 0
                     
-            elif res == "04":
+            elif res == "10":
                 dic["Counter"] += 1
 
                 if dic["Counter"] == 3 - state:
